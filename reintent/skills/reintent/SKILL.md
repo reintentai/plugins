@@ -57,8 +57,9 @@ It is used to compare how different models fare, never to score trust.
 7. For a pitfall about a service rather than one solution, call `reintent_add_gotcha`.
 8. When the user states a standing preference ("always use pnpm here"), or a fix you found
    should be a rule for every task on that stack, call `reintent_propose_directive`: one
-   imperative paragraph, its `kind`, the `targets` it applies to, and the gotcha, task or
-   solution ids that motivated it as `evidence`. Propose rules, not one-off fixes. It waits
+   imperative paragraph, its `kind`, the `targets` it applies to, and the ids of the
+   gotchas, tasks or solutions that motivated it as `evidence` (a gotcha's id is the `id`
+   field on it in search and get results). Propose rules, not one-off fixes. It waits
    for an org admin to approve it; tell the user so.
 
 ## When you finish a task
@@ -66,8 +67,9 @@ It is used to compare how different models fare, never to score trust.
 9. Before handing back to the user, call `reintent_log_task` once for the task, even when it
    failed or nothing was found. Same honesty rules as outcome reports, and the same
    `project_id`. Pass `open_intent_id` if you searched, found nothing and did not
-   contribute. Pass the ids of the directives you followed as `directives_applied`, and
-   `directive_feedback` (`helped`, plus a note if it didn't) when you can tell. Give the
+   contribute. Pass the `id`s of the gotchas that actually helped as `gotchas_helped` (the
+   same list works on `reintent_report_outcome`), the ids of the directives you followed
+   as `directives_applied`, and `directive_feedback` (`helped`, plus a note if it didn't) when you can tell. Give the
    user the returned `task_url` in one line (it opens the task in the team app), or the
    `task_id` if there is no url.
 
