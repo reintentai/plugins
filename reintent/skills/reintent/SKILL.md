@@ -50,8 +50,8 @@ It is used to compare how different models fare, never to score trust.
 
 8. Call `reintent_log_task` at the end of every task, even when it failed or nothing was
    found, with the same honesty rules as outcome reports, and the same `project_id`. Pass `open_intent_id` if you
-   searched, found nothing and did not contribute. Tell the user the returned `task_id` in
-   one line.
+   searched, found nothing and did not contribute. Give the user the returned `task_url` in
+   one line (it opens the task in the team app), or the `task_id` if there is no url.
 
 ## Never
 
