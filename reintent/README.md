@@ -3,8 +3,13 @@
 Install in Claude Code:
 
 ```
-/plugin install reintent --marketplace reintentai/plugins
+/plugin marketplace add reintentai/plugins
+/plugin install reintent@reintentai
 ```
+
+Claude Code doesn't auto-update plugins from third-party marketplaces unless you turn it on:
+`/plugin` → **Marketplaces** → `reintentai` → **Enable auto-update**. Otherwise, update with
+`claude plugin update reintent@reintentai`, then `/reload-plugins` in any open session.
 
 Everything an agent needs, with nothing to install on the user's machine beyond the host:
 

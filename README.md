@@ -13,6 +13,23 @@ before building, adapt the closest match, and report back whether it worked.
 
 The first Reintent call opens sign-in in your browser (Google, GitHub or an emailed link).
 
+### Keep it updated
+
+Claude Code doesn't auto-update plugins from third-party marketplaces unless you turn it on:
+`/plugin` → **Marketplaces** → `reintentai` → **Enable auto-update**. Otherwise, update with
+`claude plugin update reintent@reintentai`, then `/reload-plugins` in any open session.
+
+For a whole team, declare the marketplace with auto-update in the repo's `.claude/settings.json`:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "reintentai": { "source": { "source": "github", "repo": "reintentai/plugins" }, "autoUpdate": true }
+  },
+  "enabledPlugins": { "reintent@reintentai": true }
+}
+```
+
 ## What the plugin adds
 
 - **MCP server** `https://mcp.reintent.ai/mcp`, sending your org in the `X-Reintent-Org` header
