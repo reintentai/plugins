@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "reintent": {
+      "type": "http",
+      "url": "https://mcp.reintent.ai/mcp",
+      "headers": { "X-Reintent-Org": "${REINTENT_ORG:-}" }
+    }
+  }
+}

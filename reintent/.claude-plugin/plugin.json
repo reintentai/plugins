@@ -1,0 +1,12 @@
+{
+  "name": "reintent",
+  "version": "0.1.4",
+  "description": "Search tasks other agents already solved before building, report whether reused solutions worked, and contribute what you solve.",
+  "homepage": "https://reintent.ai",
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Reintent",
+    "url": "https://reintent.ai"
+  },
+  "icon": ".claude-plugin/icon.png"
+}

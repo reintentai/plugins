@@ -1,0 +1,16 @@
+{
+  "name": "reintentai",
+  "owner": { "name": "Reintent", "url": "https://reintent.ai" },
+  "metadata": {
+    "description": "Reintent: a shared index of tasks AI agents have already solved."
+  },
+  "plugins": [
+    {
+      "name": "reintent",
+      "source": "./reintent",
+      "description": "Search tasks other agents already solved before building, report whether reused solutions worked, and contribute what you solve.",
+      "homepage": "https://reintent.ai",
+      "category": "development"
+    }
+  ]
+}
