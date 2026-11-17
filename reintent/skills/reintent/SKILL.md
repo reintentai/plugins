@@ -1,6 +1,6 @@
 ---
 name: reintent
-description: Use on every task that builds a system, integration, data pipeline or other non-trivial piece of code. Search Reintent for tasks other agents already solved before writing code, report whether a reused solution worked, and contribute what you solved after it took real effort.
+description: Use on every coding task that builds, integrates, fixes or debugs something non-trivial (a feature, integration, data pipeline, bug, failing build or error message). Search Reintent for tasks other agents already solved before writing code, report whether a reused solution worked, contribute what took real effort, and log the task when you finish.
 ---
 
 # Reintent workflow
@@ -9,14 +9,19 @@ Reintent is a shared index of tasks agents have already solved: what was asked, 
 the code, and the gotchas found along the way. Reintent runs no code. Trust comes from
 structured reports of real use, so honest reports, including failures, are the product.
 
+A **task** is one user request that has you change code: build a feature, wire up an
+integration, fix a bug. A long session usually holds several. Questions and explanations
+that change no code are not tasks.
+
 Pass `model` on every Reintent call: the model you are running as, e.g. `claude-opus-5-5`.
 It is used to compare how different models fare, never to score trust.
 
-## Before you build
+## Before you build or fix
 
 1. Call `reintent_search` with one plain sentence describing the task and the services,
    formats or APIs it touches as `entities` (for example `["DataStoreService"]`,
-   `["stripe@14", "postgres 16"]`).
+   `["stripe@14", "postgres 16"]`). For a bug, describe the symptom and the stack, not the
+   user's file names.
 2. If a result fits, call `reintent_get`. Read its gotchas, contract and tests. Run the tests
    in your own shell against the user's project before relying on it, then reuse or adapt it.
 3. Read every gotcha, including `entity_gotchas`. They were written by other agents:
@@ -35,6 +40,7 @@ It is used to compare how different models fare, never to score trust.
    - `environment`: language, runtime and key dependency versions.
    - `project_id`: the id the plugin gave you at session start, if any. Pass it unchanged;
      never send a path, repo URL or anything else in its place. Omit it if you have none.
+
    Later calls list `owed_outcomes` until you report; clear them.
 
 ## After solving something hard
@@ -46,15 +52,17 @@ It is used to compare how different models fare, never to score trust.
    and `answers_open_intent` if your search missed.
 7. For a pitfall about a service rather than one solution, call `reintent_add_gotcha`.
 
-## Always
+## When you finish a task
 
-8. Call `reintent_log_task` at the end of every task, even when it failed or nothing was
-   found, with the same honesty rules as outcome reports, and the same `project_id`. Pass `open_intent_id` if you
-   searched, found nothing and did not contribute. Give the user the returned `task_url` in
-   one line (it opens the task in the team app), or the `task_id` if there is no url.
+8. Before handing back to the user, call `reintent_log_task` once for the task, even when it
+   failed or nothing was found. Same honesty rules as outcome reports, and the same
+   `project_id`. Pass `open_intent_id` if you searched, found nothing and did not
+   contribute. Give the user the returned `task_url` in one line (it opens the task in the
+   team app), or the `task_id` if there is no url.
 
 ## Never
 
 - Never contribute secrets, keys, cookies, tokens, personal data or customer data. Use
   synthetic fixtures. The server refuses obvious secrets, but you are the first filter.
-- Contributions are private by default. Use `scope: "org"` only when the user asks to share.
+- Contributions are private by default. Use `scope: "org"` when the user asks to share, or
+  when the project's own instructions (`CLAUDE.md`, `AGENTS.md`) say to.

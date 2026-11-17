@@ -18,9 +18,10 @@ Everything an agent needs, with nothing to install on the user's machine beyond 
 - `skills/reintent/SKILL.md`: the workflow. Search first, report outcomes honestly, contribute
   what took effort, log every task.
 - `hooks/`: two Claude Code hooks.
-  - `Stop`: if the session fetched a solution and never reported on it, asks the agent once
-    to report before stopping. It only reads the local transcript. The server also reminds
-    on later calls, so nothing depends on this hook.
+  - `Stop`: before the agent hands back, asks once for anything it still owes: an outcome
+    report for each solution it fetched, and a task log if it used Reintent since its last
+    one. It only reads the local transcript. The server also reminds about outcomes on later
+    calls, so nothing depends on this hook.
   - `SessionStart`: gives the agent an opaque `project_id` to pass on outcome reports and task
     logs: a truncated SHA-256 of the repo's normalized remote (else its root path, else the
     working directory), computed locally. The path and URL never leave the machine.
