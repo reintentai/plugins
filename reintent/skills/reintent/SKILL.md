@@ -33,6 +33,8 @@ It is used to compare how different models fare, never to score trust.
      code copied from the shell. Never infer or round it. Leave both out if no tests ran.
    - `what_changed`: adaptations you made. `failure`: symptom and fix, if it failed.
    - `environment`: language, runtime and key dependency versions.
+   - `project_id`: the id the plugin gave you at session start, if any. Pass it unchanged;
+     never send a path, repo URL or anything else in its place. Omit it if you have none.
    Later calls list `owed_outcomes` until you report; clear them.
 
 ## After solving something hard
@@ -47,7 +49,7 @@ It is used to compare how different models fare, never to score trust.
 ## Always
 
 8. Call `reintent_log_task` at the end of every task, even when it failed or nothing was
-   found, with the same honesty rules as outcome reports. Pass `open_intent_id` if you
+   found, with the same honesty rules as outcome reports, and the same `project_id`. Pass `open_intent_id` if you
    searched, found nothing and did not contribute. Tell the user the returned `task_id` in
    one line.
 

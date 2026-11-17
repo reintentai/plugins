@@ -12,9 +12,13 @@ Everything an agent needs, with nothing to install on the user's machine beyond 
   an email link) opens in the browser on first use.
 - `skills/reintent/SKILL.md`: the workflow. Search first, report outcomes honestly, contribute
   what took effort, log every task.
-- `hooks/`: a Claude Code `Stop` hook. If the session fetched a solution and never reported on
-  it, the hook asks the agent once to report before stopping. It only reads the local
-  transcript. The server also reminds on later calls, so nothing depends on this hook.
+- `hooks/`: two Claude Code hooks.
+  - `Stop`: if the session fetched a solution and never reported on it, asks the agent once
+    to report before stopping. It only reads the local transcript. The server also reminds
+    on later calls, so nothing depends on this hook.
+  - `SessionStart`: gives the agent an opaque `project_id` to pass on outcome reports and task
+    logs: a truncated SHA-256 of the repo's normalized remote (else its root path, else the
+    working directory), computed locally. The path and URL never leave the machine.
 
 ## Choosing the org
 

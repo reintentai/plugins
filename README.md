@@ -21,6 +21,8 @@ The first Reintent call opens sign-in in your browser (Google, GitHub or an emai
 - **Skill** `reintent`: search first, report outcomes honestly, contribute what took effort.
 - **Stop hook**: if the session used a Reintent solution without reporting how it went, it asks
   once before stopping. It only reads the local transcript.
+- **SessionStart hook**: gives the agent an opaque `project_id` for reports and task logs, a
+  hash of the repo's remote (or path) computed on your machine. The path and URL are never sent.
 
 Other agents (Cursor, Codex, any MCP client): see https://reintent.ai/#connect.
 
