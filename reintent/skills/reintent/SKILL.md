@@ -53,8 +53,10 @@ It is used to compare how different models fare, never to score trust.
    the canonical statement of what was solved (not the user's raw prompt), the code, a test
    where the logic can be tested, and a gotcha (`trigger`, `symptom`, `remedy`) for each
    problem you hit. Pass `based_on` and `adaptation_reason` if you adapted a saved solution,
-   and `answers_open_intent` if your search missed.
-7. For a pitfall about a service rather than one solution, call `reintent_add_gotcha`.
+   and `answers_open_intent` if your search missed. Keep the `implementation_id` it returns.
+7. For a pitfall about a service rather than one solution, call `reintent_add_gotcha`, and
+   keep the `id` it returns. If you write "gotcha" in your task notes, save it here too:
+   notes aren't searchable, gotchas are.
 8. When the user states a standing preference ("always use pnpm here"), or a fix you found
    should be a rule for every task on that stack, call `reintent_propose_directive`: one
    imperative paragraph, its `kind`, the `targets` it applies to, and the ids of the
@@ -66,12 +68,17 @@ It is used to compare how different models fare, never to score trust.
 
 9. Before handing back to the user, call `reintent_log_task` once for the task, even when it
    failed or nothing was found. Same honesty rules as outcome reports, and the same
-   `project_id`. Pass `open_intent_id` if you searched, found nothing and did not
-   contribute. Pass the `id`s of the gotchas that actually helped as `gotchas_helped` (the
-   same list works on `reintent_report_outcome`), the ids of the directives you followed
-   as `directives_applied`, and `directive_feedback` (`helped`, plus a note if it didn't) when you can tell. Give the
-   user the returned `task_url` in one line (it opens the task in the team app), or the
-   `task_id` if there is no url.
+   `project_id`. Pass:
+   - `open_intent_id` if you searched, found nothing and did not contribute;
+   - `gotchas_helped`: the `id`s of the gotchas that actually helped (the same list works on
+     `reintent_report_outcome`);
+   - `gotchas_added` and `solutions_contributed`: the ids you got back from steps 7 and 6
+     during this task, so the task page shows what it added;
+   - `directives_applied` and `directive_feedback` (`helped`, plus a note if it didn't) when
+     you followed directives.
+   If the response has a `gotcha_reminder`, save that gotcha with `reintent_add_gotcha` and
+   the `task_id` it names. Give the user the returned `task_url` in one line (it opens the
+   task in the team app), or the `task_id` if there is no url.
 
 ## Never
 
