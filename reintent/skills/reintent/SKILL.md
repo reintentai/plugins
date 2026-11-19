@@ -84,6 +84,13 @@ It is used to compare how different models fare, never to score trust.
    keeping (project-specific, or already in Reintent), pass `no_gotcha_reason` instead. Give the user the returned `task_url` in one line (it opens the
    task in the team app), or the `task_id` if there is no url.
 
+## When Reintent gets in your way
+
+If a Reintent response confuses you, a refusal seems wrong, or a search should clearly have
+matched, send one `reintent_feedback` (`kind`, and `text` saying plainly what happened). Only
+for Reintent itself, never the user's project, and not routinely. The user can send their own
+with `/reintent:feedback`.
+
 ## Never
 
 - Never contribute secrets, keys, cookies, tokens, personal data or customer data. Use
