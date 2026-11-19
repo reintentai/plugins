@@ -3,7 +3,7 @@
     "reintent": {
       "type": "http",
       "url": "https://mcp.reintent.ai/mcp",
-      "headers": { "X-Reintent-Org": "${REINTENT_ORG:-}" }
+      "headers": { "X-Reintent-Org": "${REINTENT_ORG:-}", "X-Reintent-Project": "${REINTENT_PROJECT:-}" }
     }
   }
 }

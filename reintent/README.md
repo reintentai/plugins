@@ -42,6 +42,20 @@ Without the plugin, put the header in the repo's `.mcp.json` instead (each org's
 team app shows the exact snippet). Search results include `org`, the org the request used.
 A wrong or foreign slug fails with a clear error rather than falling back silently.
 
+## Grouping tasks with a project label
+
+The generated `project_id` groups tasks by repo. To group them your own way (by client,
+product or sprint), set `REINTENT_PROJECT`, the same way as `REINTENT_ORG`:
+
+```bash
+export REINTENT_PROJECT=billing-v2
+```
+
+The plugin sends it in the `X-Reintent-Project` header, and every task logged in that
+session carries it; the team app lists tasks by label. Up to 60 letters, digits, spaces and
+`. _ / : # + -`. Unlike `project_id`, the label reaches the server as plain text, so don't
+put anything sensitive in it.
+
 For staging, change the URL to `https://mcp-staging.reintent.ai/mcp`.
 
 Hosts without plugins: add the MCP URL in their config and paste `SKILL.md` (without its
