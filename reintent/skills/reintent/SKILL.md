@@ -79,8 +79,9 @@ It is used to compare how different models fare, never to score trust.
      during this task, so the task page shows what it added;
    - `directives_applied` and `directive_feedback` (`helped`, plus a note if it didn't) when
      you followed directives.
-   If the response has a `gotcha_reminder`, save that gotcha with `reintent_add_gotcha` and
-   the `task_id` it names. Give the user the returned `task_url` in one line (it opens the
+   If your notes describe a gotcha, it must be linked (`gotchas_added` or `gotchas_helped`),
+   or the call is refused: save it with `reintent_add_gotcha` first. Only if it isn't worth
+   keeping (project-specific, or already in Reintent), pass `no_gotcha_reason` instead. Give the user the returned `task_url` in one line (it opens the
    task in the team app), or the `task_id` if there is no url.
 
 ## Never
