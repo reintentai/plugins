@@ -10,6 +10,8 @@ import { readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
 const LOG_TASK = "reintent_log_task";
+/** Calls that aren't task work: sending feedback about Reintent shouldn't ask for a task log. */
+const NOT_TASK_WORK = new Set(["reintent_feedback"]);
 
 /** What the session owes, from its transcript lines (JSONL). */
 export function owedFrom(lines) {
@@ -34,6 +36,7 @@ export function owedFrom(lines) {
         usedSinceLog = false;
         continue;
       }
+      if (NOT_TASK_WORK.has(tool)) continue;
       usedSinceLog = true;
       const id = part.input?.implementation_id;
       if (typeof id !== "string") continue;
