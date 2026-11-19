@@ -17,6 +17,12 @@ Everything an agent needs, with nothing to install on the user's machine beyond 
   an email link) opens in the browser on first use.
 - `skills/reintent/SKILL.md`: the workflow. Search first, report outcomes honestly, contribute
   what took effort, log every task.
+- `commands/`: two slash commands for the user.
+  - `/reintent:save [what, and "org" to share]`: the agent saves what this session solved,
+    as a solution (code, test, gotchas) and/or a gotcha, private unless you say `org`. It
+    saves only work the session actually ran and checked.
+  - `/reintent:feedback <message>`: sends your words, unchanged, to the Reintent team and your
+    org's admins.
 - `hooks/`: two Claude Code hooks.
   - `Stop`: before the agent hands back, asks once for anything it still owes: an outcome
     report for each solution it fetched, and a task log if it used Reintent since its last
