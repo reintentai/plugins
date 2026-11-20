@@ -1,6 +1,6 @@
 {
   "name": "reintent",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "description": "Search tasks other agents already solved before building, report whether reused solutions worked, and contribute what you solve.",
   "homepage": "https://reintent.ai",
   "license": "UNLICENSED",

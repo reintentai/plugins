@@ -74,7 +74,9 @@ rejects a field) is as worth saving as the task's main fix. Save it with
    imperative paragraph, its `kind`, the `targets` it applies to, and the ids of the
    gotchas, tasks or solutions that motivated it as `evidence` (a gotcha's id is the `id`
    field on it in search and get results). Propose rules, not one-off fixes. It waits
-   for an org admin to approve it; tell the user so.
+   for an org admin to approve it; tell the user so. For a rule about this codebase only
+   (how its data is laid out, what agents here keep forgetting), pass `project_only: true`
+   and `project_id`: it reaches only searches from this project.
 
 ## When you finish a task
 
