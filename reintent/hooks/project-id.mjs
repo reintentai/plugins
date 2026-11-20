@@ -66,8 +66,9 @@ if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
       hookSpecificOutput: {
         hookEventName: "SessionStart",
         additionalContext:
-          `Reintent project_id for this project: ${id}. Pass it as project_id on reintent_report_outcome ` +
-          "and reintent_log_task. It is an opaque hash computed on this machine.",
+          `Reintent project_id for this project: ${id}. Pass it as project_id on reintent_search, ` +
+          "reintent_report_outcome and reintent_log_task, and on reintent_add_gotcha with project_only: true for a " +
+          "pitfall true only of this codebase. It is an opaque hash computed on this machine.",
       },
     }),
   );

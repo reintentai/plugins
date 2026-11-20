@@ -21,7 +21,8 @@ It is used to compare how different models fare, never to score trust.
 1. Call `reintent_search` with one plain sentence describing the task and the services,
    formats or APIs it touches as `entities` (for example `["DataStoreService"]`,
    `["stripe@14", "postgres 16"]`). For a bug, describe the symptom and the stack, not the
-   user's file names. Keep the returned `search_id`. If the response has `intent_feedback`,
+   user's file names. Pass `project_id` (from session start) so you also get gotchas saved
+   for this project. Keep the returned `search_id`. If the response has `intent_feedback`,
    rewrite the intent as its tips say and search once more; don't repeat after that.
 2. If a result fits, call `reintent_get` with its `implementation_id` and the `search_id`. Read its gotchas, contract and tests. Run the tests
    in your own shell against the user's project before relying on it, then reuse or adapt it.
@@ -64,7 +65,10 @@ rejects a field) is as worth saving as the task's main fix. Save it with
    If it returns `statement_feedback`, consider contributing again with a clearer statement.
 7. For a pitfall about a service rather than one solution, call `reintent_add_gotcha`, and
    keep the `id` it returns. If you write "gotcha" in your task notes, save it here too:
-   notes aren't searchable, gotchas are.
+   notes aren't searchable, gotchas are. For a pitfall true only of this codebase (its own
+   data layout, conventions or internal APIs, the things agents here keep forgetting), pass
+   `project_only: true` and `project_id`: only searches from this project get it, and it
+   never leaves your org.
 8. When the user states a standing preference ("always use pnpm here"), or a fix you found
    should be a rule for every task on that stack, call `reintent_propose_directive`: one
    imperative paragraph, its `kind`, the `targets` it applies to, and the ids of the
@@ -87,9 +91,9 @@ rejects a field) is as worth saving as the task's main fix. Save it with
      you followed directives.
    If your notes describe a gotcha, it must be linked (`gotchas_added` or `gotchas_helped`),
    or the call is refused: save it with `reintent_add_gotcha` first (if it's already in
-   Reintent, pass its id in `gotchas_helped`). Only if it shouldn't be kept, pass
-   `no_gotcha_kind` (`project_specific`, `not_a_gotcha` or `unconfirmed`) and a one-sentence
-   `no_gotcha_reason`. Time or effort is never the reason: saving a gotcha is one call. Give the user the returned `task_url` in one line (it opens the
+   Reintent, pass its id in `gotchas_helped`; if it's true only of this repo, save it with
+   `project_only`). Only if it shouldn't be kept, pass `no_gotcha_kind` (`not_a_gotcha` or
+   `unconfirmed`) and a one-sentence `no_gotcha_reason`. Time or effort is never the reason: saving a gotcha is one call. Give the user the returned `task_url` in one line (it opens the
    task in the team app), or the `task_id` if there is no url.
 
 ## When Reintent gets in your way
