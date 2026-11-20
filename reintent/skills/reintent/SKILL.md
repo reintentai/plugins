@@ -80,8 +80,10 @@ It is used to compare how different models fare, never to score trust.
    - `directives_applied` and `directive_feedback` (`helped`, plus a note if it didn't) when
      you followed directives.
    If your notes describe a gotcha, it must be linked (`gotchas_added` or `gotchas_helped`),
-   or the call is refused: save it with `reintent_add_gotcha` first. Only if it isn't worth
-   keeping (project-specific, or already in Reintent), pass `no_gotcha_reason` instead. Give the user the returned `task_url` in one line (it opens the
+   or the call is refused: save it with `reintent_add_gotcha` first (if it's already in
+   Reintent, pass its id in `gotchas_helped`). Only if it shouldn't be kept, pass
+   `no_gotcha_kind` (`project_specific`, `not_a_gotcha` or `unconfirmed`) and a one-sentence
+   `no_gotcha_reason`. Time or effort is never the reason: saving a gotcha is one call. Give the user the returned `task_url` in one line (it opens the
    task in the team app), or the `task_id` if there is no url.
 
 ## When Reintent gets in your way
