@@ -48,6 +48,12 @@ It is used to compare how different models fare, never to score trust.
 
    Later calls list `owed_outcomes` until you report; clear them.
 
+## Things you learn in passing
+
+A quirk you hit on the way to something else (a tool's undocumented route, a service that
+rejects a field) is as worth saving as the task's main fix. Save it with
+`reintent_add_gotcha` when you hit it, or before you log the task.
+
 ## After solving something hard
 
 6. If the task took more than one attempt, or you hit a quirk, call `reintent_contribute`:

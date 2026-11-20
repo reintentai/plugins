@@ -23,10 +23,15 @@ Everything an agent needs, with nothing to install on the user's machine beyond 
     saves only work the session actually ran and checked.
   - `/reintent:feedback <message>`: sends your words, unchanged, to the Reintent team and your
     org's admins.
-- `hooks/`: two Claude Code hooks.
+- `hooks/`: three Claude Code hooks. They only read the local transcript and send nothing.
+  - `UserPromptSubmit`: until the agent has searched Reintent for the current task, adds one
+    line to your message reminding it to search before building. It goes quiet after a
+    search and starts again after the next task log. Slash commands are skipped.
   - `Stop`: before the agent hands back, asks once for anything it still owes: an outcome
     report for each solution it fetched, and a task log if it used Reintent since its last
-    one. It only reads the local transcript. The server also reminds about outcomes on later
+    one. After a task that took several attempts and saved nothing, it asks whether anything
+    learned, including in passing, is worth a gotcha. After a task logged without a search,
+    it says to search first next time. The server also reminds about outcomes on later
     calls, so nothing depends on this hook.
   - `SessionStart`: gives the agent an opaque `project_id` to pass on outcome reports and task
     logs: a truncated SHA-256 of the repo's normalized remote (else its root path, else the
